@@ -1,27 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 const App = () => {
-  const [message, setMessage] = useState('...loading')
+  const [games, setGames] = useState([]);
 
   useEffect(() => {
-    async function fetchData () {
+    async function fetchData() {
       try {
-        let data = await (await fetch('/api')).json()
-        setMessage(data.message)
+        let data = await (await fetch("/games")).json();
+        setGames(data);
       } catch (err) {
-        setMessage(err.message)
+        setGames([]);
       }
     }
-    fetchData()
-  })
+    fetchData();
+  }, []);
+
+  let gamesList = (
+    <ul>
+      {games.map((game) => (
+        <li key={game.date}>{game.date}</li>
+      ))}
+    </ul>
+  );
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>{message}</p>
+        {gamesList}
         <p>Change me!</p>
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -37,6 +45,6 @@ const App = () => {
       </header>
     </div>
   );
-}
+};
 
 export default App;
