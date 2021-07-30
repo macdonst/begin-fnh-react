@@ -60,11 +60,16 @@ const App = () => {
             "footer footer  footer",
           ],
         }}
+        rows={{
+          M: ["size-1000", "1fr", "1fr", "size-500"],
+          L: ["size-1000", "1fr", "1fr", "size-500"],
+        }}
         columns={{
           M: ["size-2400", "1fr"],
           L: ["size-2400", "1fr", "size-2400"],
         }}
         margin="size-100"
+        minHeight="100vh"
       >
         <View
           gridArea="header"
@@ -101,7 +106,7 @@ const App = () => {
           minHeight="size-1000"
           isHidden={{ base: true, L: false }}
         />
-        <View gridArea="footer" height="size-1000">
+        <View gridArea="footer" height="size-500">
           <footer style={{ textAlign: "right", fontSize: "11px" }}>
             <Divider size="S" />
             <Text>Copyright © 2021 Simon MacDonald. All rights reserved.</Text>
