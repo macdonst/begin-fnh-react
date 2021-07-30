@@ -55,14 +55,16 @@ const App = () => {
           M: ["size-2000", "1fr"],
           L: ["size-2000", "1fr", "size-2000"],
         }}
-        gap="size-100"
         margin="size-100"
       >
         <View
-          backgroundColor="celery-600"
           gridArea="header"
           height="size-1000"
-        />
+          elementType="header"
+          borderBottomWidth="thin"
+        >
+          <Heading level="1">🏒 Friday Night Hockey</Heading>
+        </View>
         <View backgroundColor="gray-300" gridArea="nav" elementType="nav">
           <Flex
             direction={{ base: "row", M: "column" }}
