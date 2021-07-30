@@ -8,27 +8,36 @@ import {
   Divider,
   Text,
   Heading,
+  Link,
 } from "@adobe/react-spectrum";
+
+import AddGameDialog from "./AddGameDialog";
 
 const App = () => {
   const [games, setGames] = useState([]);
+  const [selected, setSelected] = useState(null);
+
+  const fetchData = async () => {
+    try {
+      let data = await (await fetch("/games")).json();
+      setGames(data);
+    } catch (err) {
+      setGames([]);
+    }
+  };
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        let data = await (await fetch("/games")).json();
-        setGames(data);
-      } catch (err) {
-        setGames([]);
-      }
-    }
     fetchData();
   }, []);
 
   let gamesList = (
     <ul>
       {games.map((game) => (
-        <li key={game.date}>{game.date}</li>
+        <li key={game.date}>
+          <Link isQuiet onPress={() => setSelected(game.date)}>
+            {game.date}
+          </Link>
+        </li>
       ))}
     </ul>
   );
@@ -52,8 +61,8 @@ const App = () => {
           ],
         }}
         columns={{
-          M: ["size-2000", "1fr"],
-          L: ["size-2000", "1fr", "size-2000"],
+          M: ["size-2400", "1fr"],
+          L: ["size-2400", "1fr", "size-2400"],
         }}
         margin="size-100"
       >
@@ -74,6 +83,7 @@ const App = () => {
             <View>
               <Heading>Games</Heading>
               {gamesList}
+              <AddGameDialog callback={fetchData} />
             </View>
           </Flex>
         </View>
@@ -81,7 +91,10 @@ const App = () => {
           backgroundColor="purple-600"
           gridArea="content"
           height="size-4600"
-        />
+          elementType="main"
+        >
+          {selected}
+        </View>
         <View
           backgroundColor="magenta-600"
           gridArea="toc"

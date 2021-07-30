@@ -11,10 +11,10 @@ exports.handler = async function read(req) {
     games.push(game);
   }
 
-  games.sort((a, b) => a.created - b.created);
+  games.sort((a, b) => a.date - b.date);
 
   return {
-    statusCode: 201,
+    statusCode: 200,
     headers: {
       "content-type": "application/json; charset=utf8",
       "cache-control":
