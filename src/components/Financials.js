@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, Link, View } from "@adobe/react-spectrum";
+import { Heading, View } from "@adobe/react-spectrum";
 
 const Financials = (props) => {
   return (
