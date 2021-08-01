@@ -68,7 +68,8 @@ const App = () => {
           M: ["size-2400", "1fr"],
           L: ["size-2400", "1fr", "size-2400"],
         }}
-        margin="size-100"
+        marginTop="size-100"
+        marginBottom="size-100"
         minHeight="100vh"
       >
         <View
@@ -77,7 +78,9 @@ const App = () => {
           elementType="header"
           borderBottomWidth="thin"
         >
-          <Heading level="1">🏒 Friday Night Hockey</Heading>
+          <Heading level="1" marginStart="size-400" marginEnd="size-400">
+            🏒 Friday Night Hockey
+          </Heading>
         </View>
         <View backgroundColor="gray-300" gridArea="nav" elementType="nav">
           <Flex
@@ -95,7 +98,9 @@ const App = () => {
         <View
           backgroundColor="purple-600"
           gridArea="content"
-          height="size-4600"
+          minHeight="size-4600"
+          paddingStart="size-675"
+          paddingEnd="size-675"
           elementType="main"
         >
           {selected}
@@ -106,7 +111,12 @@ const App = () => {
           minHeight="size-1000"
           isHidden={{ base: true, L: false }}
         />
-        <View gridArea="footer" height="size-500">
+        <View
+          gridArea="footer"
+          height="size-500"
+          marginStart="size-400"
+          marginEnd="size-400"
+        >
           <footer style={{ textAlign: "right", fontSize: "11px" }}>
             <Divider size="S" />
             <Text>Copyright © 2021 Simon MacDonald. All rights reserved.</Text>
