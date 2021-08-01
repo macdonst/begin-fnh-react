@@ -12,6 +12,7 @@ import {
 } from "@adobe/react-spectrum";
 
 import AddGameDialog from "./AddGameDialog";
+import GamePanel from "./GamePanel";
 
 const App = () => {
   const [games, setGames] = useState([]);
@@ -34,7 +35,7 @@ const App = () => {
     <ul>
       {games.map((game) => (
         <li key={game.date}>
-          <Link isQuiet onPress={() => setSelected(game.date)}>
+          <Link isQuiet onPress={() => setSelected(game.key)}>
             {game.date}
           </Link>
         </li>
@@ -96,14 +97,15 @@ const App = () => {
           </Flex>
         </View>
         <View
-          backgroundColor="purple-600"
           gridArea="content"
           minHeight="size-4600"
           paddingStart="size-675"
           paddingEnd="size-675"
+          paddingTop="size-500"
+          paddingBottom="size-500"
           elementType="main"
         >
-          {selected}
+          <GamePanel selected={selected} games={games} />
         </View>
         <View
           backgroundColor="magenta-600"
