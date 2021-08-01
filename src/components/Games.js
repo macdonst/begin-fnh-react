@@ -1,8 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { Heading, View } from "@adobe/react-spectrum";
+import {
+  Heading,
+  View,
+  IllustratedMessage,
+  Content,
+} from "@adobe/react-spectrum";
+import {
+  TableView,
+  TableHeader,
+  TableBody,
+  Cell,
+  Column,
+  Row,
+} from "@react-spectrum/table";
 import { Link, Route, useRouteMatch } from "react-router-dom";
 
 import GamePanel from "../GamePanel";
+
+let columns = [
+  { name: "Date", uid: "date" },
+  { name: "Time", uid: "time" },
+  { name: "Facility", uid: "facility" },
+];
+
+const renderEmptyState = () => {
+  return (
+    <IllustratedMessage>
+      <Heading>No results</Heading>
+      <Content>No results found</Content>
+    </IllustratedMessage>
+  );
+};
 
 const Games = (props) => {
   const { path } = useRouteMatch();
@@ -21,21 +49,42 @@ const Games = (props) => {
     fetchData();
   }, []);
 
-  let gamesList = (
-    <ul>
-      {games.map((game) => (
-        <li key={game.date}>
-          <Link to={`${path}/${game.key}`}>{game.date}</Link>
-        </li>
-      ))}
-    </ul>
-  );
-
   return (
     <View>
       <Route exact path="/games">
         <Heading level="1">Games</Heading>
-        {gamesList}
+        <TableView
+          aria-label="Example table with dynamic content"
+          width="100%"
+          renderEmptyState={renderEmptyState}
+        >
+          <TableHeader columns={columns}>
+            {(column) => (
+              <Column
+                key={column.uid}
+                align="start"
+                width={column.uid !== "facility" ? "20%" : "60%"}
+              >
+                {column.name}
+              </Column>
+            )}
+          </TableHeader>
+          <TableBody items={games}>
+            {(item) => (
+              <Row>
+                {(columnKey) => (
+                  <Cell>
+                    {columnKey === "date" ? (
+                      <Link to={`${path}/${item.key}`}>{item[columnKey]}</Link>
+                    ) : (
+                      item[columnKey]
+                    )}
+                  </Cell>
+                )}
+              </Row>
+            )}
+          </TableBody>
+        </TableView>
       </Route>
       <Route path="/games/:gameId">
         <GamePanel games={games} />
