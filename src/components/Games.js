@@ -15,6 +15,7 @@ import {
 } from "@react-spectrum/table";
 import { Link, Route, useRouteMatch } from "react-router-dom";
 
+import AddGameDialog from "../AddGameDialog";
 import GamePanel from "../GamePanel";
 
 let columns = [
@@ -39,6 +40,7 @@ const Games = (props) => {
   const fetchData = async () => {
     try {
       let data = await (await fetch("/games")).json();
+      data = data.sort((a, b) => (a.date <= b.date ? -1 : 1));
       setGames(data);
     } catch (err) {
       setGames([]);
@@ -53,6 +55,7 @@ const Games = (props) => {
     <View>
       <Route exact path="/games">
         <Heading level="1">Games</Heading>
+        <AddGameDialog callback={fetchData} />
         <TableView
           aria-label="Example table with dynamic content"
           width="100%"
