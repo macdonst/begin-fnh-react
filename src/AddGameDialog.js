@@ -9,8 +9,10 @@ import {
   Heading,
   ButtonGroup,
   Button,
+  ActionButton,
   TextField,
 } from "@adobe/react-spectrum";
+import Add from "@spectrum-icons/workflow/Add";
 
 const AddGameDialog = ({ callback }) => {
   const [facility, setFacility] = useState("");
@@ -33,7 +35,10 @@ const AddGameDialog = ({ callback }) => {
 
   return (
     <DialogTrigger type="modal">
-      <Button variant="cta">Add Game</Button>
+      <ActionButton>
+        <Add />
+        <Text>Add</Text>
+      </ActionButton>
       {(close) => (
         <Dialog>
           <Heading>Add Game</Heading>

@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {
+  ActionGroup,
   Heading,
   View,
   IllustratedMessage,
   Content,
+  Item,
+  Text,
+  Flex,
 } from "@adobe/react-spectrum";
 import {
   TableView,
@@ -14,15 +18,11 @@ import {
   Row,
 } from "@react-spectrum/table";
 import { Link, Route, useRouteMatch } from "react-router-dom";
+import Draw from "@spectrum-icons/workflow/Draw";
 
 import AddGameDialog from "../AddGameDialog";
+import DeleteGameDialog from "../DeleteGameDialog";
 import GamePanel from "../GamePanel";
-
-let columns = [
-  { name: "Date", uid: "date" },
-  { name: "Time", uid: "time" },
-  { name: "Facility", uid: "facility" },
-];
 
 const renderEmptyState = () => {
   return (
@@ -36,6 +36,8 @@ const renderEmptyState = () => {
 const Games = (props) => {
   const { path } = useRouteMatch();
   const [games, setGames] = useState([]);
+  let [selectedKeys, setSelectedKeys] = useState(new Set([]));
+  let [disabledKeys, setDisabledKeys] = useState([["edit", "delete"]]);
 
   const fetchData = async () => {
     try {
@@ -51,26 +53,53 @@ const Games = (props) => {
     fetchData();
   }, []);
 
+  const updateSelection = (selection) => {
+    setSelectedKeys(selection);
+    let keys = selection.size > 0 ? [] : ["edit", "delete"];
+    setDisabledKeys(keys);
+  };
+
   return (
     <View>
       <Route exact path="/games">
         <Heading level="1">Games</Heading>
-        <AddGameDialog callback={fetchData} />
+        <Flex
+          direction="row"
+          justifyContent="end"
+          marginBottom="size-100"
+          gap="size-100"
+        >
+          <AddGameDialog callback={fetchData} />
+          <ActionGroup disabledKeys={disabledKeys}>
+            <Item key="edit">
+              <Draw />
+              <Text>Edit</Text>
+            </Item>
+          </ActionGroup>
+          <DeleteGameDialog
+            keys={selectedKeys}
+            games={games}
+            callback={fetchData}
+          />
+        </Flex>
         <TableView
-          aria-label="Example table with dynamic content"
+          aria-label="Table of hockey games"
           width="100%"
+          selectionMode="single"
+          selectedKeys={selectedKeys}
+          onSelectionChange={(selection) => updateSelection(selection)}
           renderEmptyState={renderEmptyState}
         >
-          <TableHeader columns={columns}>
-            {(column) => (
-              <Column
-                key={column.uid}
-                align="start"
-                width={column.uid !== "facility" ? "20%" : "60%"}
-              >
-                {column.name}
-              </Column>
-            )}
+          <TableHeader>
+            <Column key="date" align="start">
+              Date
+            </Column>
+            <Column key="time" align="start">
+              Time
+            </Column>
+            <Column key="facility" align="start">
+              Facility
+            </Column>
           </TableHeader>
           <TableBody items={games}>
             {(item) => (

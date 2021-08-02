@@ -25,8 +25,8 @@
         }
       },
       {
-        "/games/delete": {
-          "method": "post",
+        "/games/:id": {
+          "method": "delete",
           "src": "/games/delete"
         }
       },

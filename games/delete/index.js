@@ -1,18 +1,14 @@
-let arc = require("@architect/functions");
 let data = require("@begin/data");
 
 exports.handler = async function destroy(req) {
-  let key = arc.http.helpers.bodyParser(req).key;
+  const { id } = req.pathParameters;
+  console.log(id);
   await data.destroy({
-    key,
+    key: id,
     table: "games",
   });
+
   return {
-    statusCode: 302,
-    headers: {
-      location: "/",
-      "cache-control":
-        "no-cache, no-store, must-revalidate, max-age=0, s-maxage=0",
-    },
+    statusCode: 204,
   };
 };
