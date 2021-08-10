@@ -17,12 +17,13 @@ import {
   Column,
   Row,
 } from "@react-spectrum/table";
-import { Link, Route, useRouteMatch } from "react-router-dom";
+import { Route, useRouteMatch } from "react-router-dom";
 import Draw from "@spectrum-icons/workflow/Draw";
 
 import AddGameDialog from "../AddGameDialog";
 import DeleteGameDialog from "../DeleteGameDialog";
 import GamePanel from "../GamePanel";
+import Link from "./Link";
 
 const renderEmptyState = () => {
   return (
