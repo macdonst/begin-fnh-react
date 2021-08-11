@@ -37,6 +37,30 @@
         }
       },
       {
+        "/players": {
+          "method": "post",
+          "src": "/players/create"
+        }
+      },
+      {
+        "/players": {
+          "method": "get",
+          "src": "/players/read"
+        }
+      },
+      {
+        "/players/:id": {
+          "method": "delete",
+          "src": "/players/delete"
+        }
+      },
+      {
+        "/players/:id": {
+          "method": "post",
+          "src": "/players/update"
+        }
+      },
+      {
         "/api": {
           "method": "get",
           "src": "/api"
