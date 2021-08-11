@@ -4,7 +4,7 @@ import { Heading, View } from "@adobe/react-spectrum";
 const Financials = (props) => {
   return (
     <View>
-      <Heading level="1">Financials</Heading>
+      <Heading level="2">Financials</Heading>
     </View>
   );
 };

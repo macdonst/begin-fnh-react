@@ -19,10 +19,10 @@ const GamePanel = ({ games }) => {
     : "";
   return (
     <View>
-      <Heading level="1">
+      <Heading level="2">
         {gameDate} {game?.time}
       </Heading>
-      <Heading level="2">{game?.facility}</Heading>
+      <Heading level="3">{game?.facility}</Heading>
     </View>
   );
 };

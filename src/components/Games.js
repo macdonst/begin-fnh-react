@@ -63,7 +63,7 @@ const Games = (props) => {
   return (
     <View>
       <Route exact path="/games">
-        <Heading level="1">Games</Heading>
+        <Heading level="2">Games</Heading>
         <Flex
           direction="row"
           justifyContent="end"
