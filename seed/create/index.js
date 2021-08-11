@@ -1,4 +1,4 @@
-let arc = require("@architect/functions");
+// let arc = require("@architect/functions");
 let data = require("@begin/data");
 
 let players = require("./players");
@@ -9,6 +9,7 @@ exports.handler = async function create(req) {
     return { players, ...game };
   });
   await data.set(games);
+  await data.set(players);
   return {
     statusCode: 200,
   };
