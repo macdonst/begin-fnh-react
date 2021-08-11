@@ -3,8 +3,6 @@ import {
   ActionGroup,
   Heading,
   View,
-  IllustratedMessage,
-  Content,
   Item,
   Text,
   Flex,
@@ -24,15 +22,7 @@ import AddGameDialog from "../AddGameDialog";
 import DeleteGameDialog from "../DeleteGameDialog";
 import GamePanel from "../GamePanel";
 import Link from "./Link";
-
-const renderEmptyState = () => {
-  return (
-    <IllustratedMessage>
-      <Heading>No results</Heading>
-      <Content>No results found</Content>
-    </IllustratedMessage>
-  );
-};
+import { renderEmptyState } from "../utils";
 
 const Games = (props) => {
   const { path } = useRouteMatch();
