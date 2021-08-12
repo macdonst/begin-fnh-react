@@ -19,7 +19,7 @@ import { Route, useRouteMatch } from "react-router-dom";
 import Draw from "@spectrum-icons/workflow/Draw";
 
 import AddDialog from "../components/AddDialog";
-import DeleteGameDialog from "../DeleteGameDialog";
+import DeleteDialog from "../components/DeleteDialog";
 import GamePanel from "../GamePanel";
 import Link from "../components/Link";
 import { renderEmptyState } from "../utils";
@@ -80,9 +80,11 @@ const Games = (props) => {
               <Text>Edit</Text>
             </Item>
           </ActionGroup>
-          <DeleteGameDialog
+          <DeleteDialog
+            route="/games"
+            type="game"
             keys={selectedKeys}
-            games={games}
+            data={games}
             callback={fetchData}
           />
         </Flex>

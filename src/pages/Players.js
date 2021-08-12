@@ -12,10 +12,12 @@ import {
   Row,
 } from "@react-spectrum/table";
 import AddDialog from "../components/AddDialog";
+import DeleteDialog from "../components/DeleteDialog";
 
 const Players = (props) => {
   const { path } = useRouteMatch();
   const [players, setPlayers] = useState([]);
+  const [selectedKeys, setSelectedKeys] = useState(new Set([]));
 
   const fetchData = async () => {
     try {
@@ -30,6 +32,10 @@ const Players = (props) => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const updateSelection = (selection) => {
+    setSelectedKeys(selection);
+  };
 
   return (
     <View>
@@ -60,13 +66,20 @@ const Players = (props) => {
             ]}
             callback={fetchData}
           />
+          <DeleteDialog
+            route="/players"
+            type="player"
+            keys={selectedKeys}
+            data={players}
+            callback={fetchData}
+          />
         </Flex>
         <TableView
           aria-label="Table of hockey players"
           width="100%"
           selectionMode="single"
-          // selectedKeys={selectedKeys}
-          // onSelectionChange={(selection) => updateSelection(selection)}
+          selectedKeys={selectedKeys}
+          onSelectionChange={(selection) => updateSelection(selection)}
           renderEmptyState={renderEmptyState}
         >
           <TableHeader>

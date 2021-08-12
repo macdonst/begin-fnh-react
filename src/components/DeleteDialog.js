@@ -7,13 +7,13 @@ import {
 } from "@adobe/react-spectrum";
 import Delete from "@spectrum-icons/workflow/Delete";
 
-const DeleteGameDialog = ({ keys, games, callback }) => {
+const DeleteDialog = ({ route, type, keys, data, callback }) => {
   const key = keys.values().next().value;
-  const game = games.find((game) => game.key === key);
+  const item = data.find((item) => item.key === key);
 
-  const deleteGame = async () => {
-    console.log(`/games/${game.key}`);
-    const response = await fetch(`/games/${game.key}`, {
+  const deleteItem = async () => {
+    console.log(`${route}/${item.key}`);
+    const response = await fetch(`${route}/${item.key}`, {
       method: "DELETE",
     });
     console.log(response);
@@ -30,15 +30,15 @@ const DeleteGameDialog = ({ keys, games, callback }) => {
       </ActionButton>
       <AlertDialog
         variant="destructive"
-        title="Delete game"
+        title={`Delete ${type}`}
         primaryActionLabel="Delete"
         cancelLabel="Cancel"
-        onPrimaryAction={deleteGame}
+        onPrimaryAction={deleteItem}
       >
-        This will permanently delete the selected game. Continue?
+        This will permanently delete the selected {type}. Continue?
       </AlertDialog>
     </DialogTrigger>
   );
 };
 
-export default DeleteGameDialog;
+export default DeleteDialog;
