@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, useRouteMatch } from "react-router-dom";
-import { Heading, View } from "@adobe/react-spectrum";
+import { Flex, Heading, View } from "@adobe/react-spectrum";
 import { renderEmptyState } from "../utils";
 import Link from "../components/Link";
 import {
@@ -11,6 +11,7 @@ import {
   Column,
   Row,
 } from "@react-spectrum/table";
+import AddDialog from "../components/AddDialog";
 
 const Players = (props) => {
   const { path } = useRouteMatch();
@@ -34,6 +35,32 @@ const Players = (props) => {
     <View>
       <Heading level="2">Players</Heading>
       <Route exact path="/players">
+        <Flex
+          direction="row"
+          justifyContent="end"
+          marginBottom="size-100"
+          gap="size-100"
+        >
+          <AddDialog
+            route="/players"
+            type="player"
+            fields={[
+              {
+                label: "Name",
+                placeholder: "Guy Incognito",
+                type: "name",
+              },
+              {
+                label: "Email",
+                placeholder: "fake_email@gmail.com",
+                type: "date",
+              },
+              { label: "Goalie", placeholder: "false", type: "goalie" },
+              { label: "Full Time", placeholder: "true", type: "fullTime" },
+            ]}
+            callback={fetchData}
+          />
+        </Flex>
         <TableView
           aria-label="Table of hockey players"
           width="100%"

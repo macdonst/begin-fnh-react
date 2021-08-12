@@ -14,18 +14,16 @@ import {
 } from "@adobe/react-spectrum";
 import Add from "@spectrum-icons/workflow/Add";
 
-const AddGameDialog = ({ callback }) => {
-  const [facility, setFacility] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+const AddDialog = ({ route, type, fields, callback }) => {
+  const [state, setState] = useState({ facility: "", date: "", time: "" });
 
-  const addGame = async (facility, date, time) => {
-    const response = await fetch("/games", {
+  const add = async (state) => {
+    const response = await fetch(route, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ facility, date, time }),
+      body: JSON.stringify(state),
     });
     console.log(response);
     if (response.status === 201) {
@@ -41,31 +39,20 @@ const AddGameDialog = ({ callback }) => {
       </ActionButton>
       {(close) => (
         <Dialog>
-          <Heading>Add Game</Heading>
+          <Heading>Add {type}</Heading>
           <Divider />
           <Content>
-            <Text>Add a new game to Friday Night Hockey</Text>
-            <Form
-              maxWidth="size-3600"
-              isRequired
-              necessityIndicator="label"
-              onSubmit={(ack) => console.log(ack)}
-            >
-              <TextField
-                label="Facility"
-                placeholder="Kanata Rec Centre"
-                onChange={(data) => setFacility(data)}
-              />
-              <TextField
-                label="Date"
-                placeholder="2021-07-30"
-                onChange={(data) => setDate(data)}
-              />
-              <TextField
-                label="Time"
-                placeholder="10:00 PM"
-                onChange={(data) => setTime(data)}
-              />
+            <Text>Add a new {type} to Friday Night Hockey</Text>
+            <Form maxWidth="size-3600" isRequired necessityIndicator="label">
+              {fields.map((field) => (
+                <TextField
+                  label={field.label}
+                  placeholder={field.placeholder}
+                  onChange={(data) =>
+                    setState({ ...state, ...{ [field.type]: data } })
+                  }
+                />
+              ))}
             </Form>
           </Content>
           <ButtonGroup>
@@ -76,7 +63,7 @@ const AddGameDialog = ({ callback }) => {
               variant="cta"
               onPress={async () => {
                 try {
-                  await addGame(facility, date, time);
+                  await add(state);
                 } catch (err) {
                   console.log(err);
                 }
@@ -93,4 +80,4 @@ const AddGameDialog = ({ callback }) => {
   );
 };
 
-export default AddGameDialog;
+export default AddDialog;

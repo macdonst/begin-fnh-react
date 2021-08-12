@@ -18,7 +18,7 @@ import {
 import { Route, useRouteMatch } from "react-router-dom";
 import Draw from "@spectrum-icons/workflow/Draw";
 
-import AddGameDialog from "../AddGameDialog";
+import AddDialog from "../components/AddDialog";
 import DeleteGameDialog from "../DeleteGameDialog";
 import GamePanel from "../GamePanel";
 import Link from "../components/Link";
@@ -60,7 +60,20 @@ const Games = (props) => {
           marginBottom="size-100"
           gap="size-100"
         >
-          <AddGameDialog callback={fetchData} />
+          <AddDialog
+            route="/games"
+            type="game"
+            fields={[
+              {
+                label: "Facility",
+                placeholder: "Kanata Rec Centre",
+                type: "facility",
+              },
+              { label: "Date", placeholder: "2021-07-30", type: "date" },
+              { label: "Time", placeholder: "10:00 PM", type: "time" },
+            ]}
+            callback={fetchData}
+          />
           <ActionGroup disabledKeys={disabledKeys}>
             <Item key="edit">
               <Draw />
