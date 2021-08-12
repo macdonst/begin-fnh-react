@@ -12,9 +12,9 @@ import {
 } from "@adobe/react-spectrum";
 
 import Navbar from "./Navbar";
-import Games from "./components/Games";
-import Players from "./components/Players";
-import Financials from "./components/Financials";
+import Games from "./pages/Games";
+import Players from "./pages/Players";
+import Financials from "./pages/Financials";
 
 const App = () => {
   return (

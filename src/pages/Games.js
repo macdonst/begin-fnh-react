@@ -21,7 +21,7 @@ import Draw from "@spectrum-icons/workflow/Draw";
 import AddGameDialog from "../AddGameDialog";
 import DeleteGameDialog from "../DeleteGameDialog";
 import GamePanel from "../GamePanel";
-import Link from "./Link";
+import Link from "../components/Link";
 import { renderEmptyState } from "../utils";
 
 const Games = (props) => {

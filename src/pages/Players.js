@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, useRouteMatch } from "react-router-dom";
 import { Heading, View } from "@adobe/react-spectrum";
 import { renderEmptyState } from "../utils";
-import Link from "./Link";
+import Link from "../components/Link";
 import {
   TableView,
   TableHeader,
