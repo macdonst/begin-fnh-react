@@ -13,6 +13,7 @@ import {
 } from "@react-spectrum/table";
 import AddDialog from "../components/AddDialog";
 import DeleteDialog from "../components/DeleteDialog";
+import PlayerPanel from "../panels/PlayerPanel";
 
 const Players = (props) => {
   const { path } = useRouteMatch();
@@ -23,6 +24,7 @@ const Players = (props) => {
     try {
       let data = await (await fetch("/players")).json();
       data = data.sort((a, b) => (a.name <= b.name ? -1 : 1));
+      console.log(data);
       setPlayers(data);
     } catch (err) {
       setPlayers([]);
@@ -119,6 +121,9 @@ const Players = (props) => {
             )}
           </TableBody>
         </TableView>
+      </Route>
+      <Route path="/players/:playerId">
+        <PlayerPanel players={players} />
       </Route>
     </View>
   );

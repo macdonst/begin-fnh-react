@@ -80,6 +80,7 @@ const App = () => {
               <Route exact path="/games" component={Games} />
               <Route exact path="/games/:gameId" component={Games} />
               <Route exact path="/players" component={Players} />
+              <Route exact path="/Players/:playerId" component={Players} />
               <Route exact path="/financials" component={Financials} />
             </Switch>
           </View>
