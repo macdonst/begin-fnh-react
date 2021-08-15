@@ -20,7 +20,7 @@ import Draw from "@spectrum-icons/workflow/Draw";
 
 import AddDialog from "../components/AddDialog";
 import DeleteDialog from "../components/DeleteDialog";
-import GamePanel from "../GamePanel";
+import GamePanel from "../panels/GamePanel";
 import Link from "../components/Link";
 import { renderEmptyState } from "../utils";
 
